@@ -5,11 +5,11 @@ import {
     } from '@chakra-ui/react'
 
 
-    const InputForm = ( {label, name, ...rest}) => {
+    const InputForm = ( ) => {
         return  (
             <FormControl margin="lrem">
-                <FormLabel>{label}</FormLabel>
-                <Input type="email" name={name} id={name} {...rest} />
+                <FormLabel></FormLabel>
+                <Input type="email" />
             </FormControl>
         )
     }
