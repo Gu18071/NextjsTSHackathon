@@ -4,8 +4,8 @@
 1. npm install
 2. npm install react-hook-form
 3. npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
-2. npm i react-icons
-3. npm run dev
+4. npm i react-icons
+5. npm run dev
 
 # or
 yarn dev
