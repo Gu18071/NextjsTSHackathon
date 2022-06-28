@@ -1,4 +1,4 @@
-import { Button, Heading, HStack, Spacer } from '@chakra-ui/react'
+import { Button, Container, Heading, HStack, Spacer } from '@chakra-ui/react'
 import { FaEye } from "react-icons/fa";
 import {
   Text,
@@ -24,6 +24,8 @@ import { ColorModeSwitcher } from '../Components/ColorModeSwitcher'
 import api from '../services/api';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import axios from 'axios';
+import React from 'react';
 
 interface ClienteAPI {
   id: number,
@@ -34,8 +36,7 @@ interface ClienteAPI {
 const Home: NextPage = () => {
 
   const router = useRouter()
-
-  const [clientes, setClientes] = useState([]);
+  const [clientes, setClientes] = useState<any[]>([]);
   
 
   useEffect(() => {
@@ -48,51 +49,65 @@ const Home: NextPage = () => {
     fetchData();
 
   }, []);
+
+  function deleteCliente (id :number) {
+         axios.delete(`https://api-hackaton-unialfa2022.herokuapp.com/api/clientes/${id}`)
+
+         setClientes(clientes.filter(cliente => cliente.id !== id))
+  };
+
   return (
-    <Box margin="4">
-      <Flex justifyContent="space-between" margin="4" paddingBottom="6">
-        <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal"  onClick={() => router.push('../CadastroClientes')}>Cadastro de cliente</Button>
-        <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal"  onClick={() => router.push('../CadastroPesquisa')}>Cadastro de pesquisa</Button>
-        <Text color="light" fontSize='3xl' fontFamily="Open Sans">Listagem de Clientes</Text>
+    <Box margin="8">
+      <Flex  margin="4" paddingBottom="6">
+        <Box>
+        <Button fontSize="sm"   colorScheme="teal"  onClick={() => router.push('../CadastroClientes')}>Cadastro de cliente</Button>
+        </Box>
+        <Box>
+        <Button fontSize="sm" marginLeft="4rem" colorScheme="teal"  onClick={() => router.push('../CadastroPesquisa')}>Cadastro de pesquisa</Button>
+        </Box>
+        <Spacer />
+        <Box>
+        <Text color="light" fontSize='3xl' textAlign="center" justifyContent="center" fontFamily="Open Sans" marginLeft="4rem" marginRight="23rem">Listagem de Clientes</Text>
+        </Box>
+        <Spacer />
+        <Box>
         <ColorModeSwitcher />
+        </Box>
       </Flex>
-      <Flex>
-        <Table variant="simple">
-          <Thead bgColor="blue.500">
-            <Tr>
-            <Th textColor="white">Id</Th>
-              <Th textColor="white">Nome</Th>
-              <Th textColor="white">Email</Th>
-              <Th textColor="white">Acões</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {
-              clientes.map((cliente: ClienteAPI, index) => (
-                <Tr key={index}>
-                  <Td>{cliente.id}</Td>
-                  <Td>{cliente.nome}</Td>
-                  <Td>{cliente.email}</Td>
-                  <Td>
-                    <Flex justifyContent="space-between">
-                      <Button size="sm" fontSize="smaller" colorScheme="yellow" mr="2">Editar</Button>
-                      <Button size="sm" fontSize="smaller" colorScheme="red">Excluir</Button>
-                      <Button size="sm" fontSize="smaller" colorScheme="blue"><FaEye /></Button>
-                    </Flex>
-                  </Td>
-                </Tr>
-              ))
-            }
-          </Tbody>
-        </Table>
-      </Flex>
+      <TableContainer  minWidth="60rem"  maxWidth="100rem">
+        <Flex>
+          <Table variant="simple">
+            <Thead bgColor="blue.500">
+              <Tr>
+              <Th textColor="white">Id</Th>
+                <Th textColor="white">Nome</Th>
+                <Th textColor="white">Email</Th>
+                <Th textColor="white">Acões</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {
+                clientes.map((cliente: ClienteAPI, id) => (
+                  <Tr key={id}>
+                    <Td>{cliente.id}</Td>
+                    <Td>{cliente.nome}</Td>
+                    <Td>{cliente.email}</Td>
+                    <Td>
+                      <Flex justifyContent="space-between">
+                        <Button size="sm"  fontSize="smaller" colorScheme="yellow" mr="2" onClick={() => router.push(`../EditClientes/${cliente.id}`)}>Editar</Button>
+                        <Button size="sm" fontSize="smaller" colorScheme="red"  onClick={() => deleteCliente(cliente.id)}>Excluir</Button>
+                        <Button size="sm" fontSize="smaller" colorScheme="blue" onClick={() => router.push(`../DadosClientes/${cliente.id}`)}><FaEye /></Button>
+                      </Flex>
+                    </Td>
+                  </Tr>
+                ))
+              }
+            </Tbody>
+          </Table>
+        </Flex>
+        </TableContainer>
     </Box>
 
   )
 }
-
 export default Home
-
-
-
-
