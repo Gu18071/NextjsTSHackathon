@@ -1,18 +1,16 @@
 import type { NextPage } from 'next'
-import { Button, Heading, HStack } from '@chakra-ui/react'
+import { Button, Spacer } from '@chakra-ui/react'
 import {
     Text,
     Flex,
     Box,
-    Link,
     FormControl,
     FormLabel,
     Input,
     VStack,
 } from '@chakra-ui/react'
 import { ColorModeSwitcher } from '../Components/ColorModeSwitcher'
-import InputForm from '../Components/Input'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm } from 'react-hook-form'
 import api from '../services/api'
 import { useRouter } from 'next/router'
 
@@ -32,11 +30,19 @@ const CadastroPesquisa: NextPage = () => {
     }
     
     return (
-        <Box margin="4">
-            <Flex justifyContent="space-between" margin="4" paddingBottom="6">
+        <Box margin="8">
+            <Flex margin="4" paddingBottom="6">
+                <Box>
                 <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal" onClick={() => router.push('/')} >Voltar</Button>
-                <Text color="light" fontSize='3xl' fontFamily="Open Sans">Cadastro de Pesquisas</Text>
+                </Box>
+                <Spacer />
+                <Box>
+                <Text color="light" fontSize='3xl' fontFamily="Open Sans"  justifyContent="center" textAlign="center">Cadastro de Pesquisas</Text>
+                </Box>
+                <Spacer />
+                <Box>
                 <ColorModeSwitcher />
+                </Box>
             </Flex>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <VStack marginY="0.5rem">

@@ -1,22 +1,15 @@
-import { Button, Container, Heading, HStack, Spacer } from '@chakra-ui/react'
+import { Button, Spacer } from '@chakra-ui/react'
 import { FaEye } from "react-icons/fa";
 import {
   Text,
   Flex,
   Box,
-  Link,
-  FormControl,
-  FormLabel,
-  Input,
-  VStack,
   Table,
   Thead,
   Tbody,
-  Tfoot,
   Tr,
   Th,
   Td,
-  TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
 import type { NextPage } from 'next'

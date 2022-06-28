@@ -1,29 +1,17 @@
-import { Avatar, Button, Container, Heading, HStack, Spacer } from '@chakra-ui/react'
-import { FaEye } from "react-icons/fa";
+import { Avatar, Button, HStack, Spacer } from '@chakra-ui/react'
 import {
   Text,
   Flex,
   Box,
-  Link,
   FormControl,
   FormLabel,
   Input,
   VStack,
-  Table,
-  Thead,
-  Tbody,
-  Tfoot,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
 } from '@chakra-ui/react'
-import type { NextPage } from 'next'
 import { ColorModeSwitcher } from '../../../Components/ColorModeSwitcher'
 import api from '../../../services/api';
-import { useEffect, useState } from 'react';
-import router, { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -65,12 +53,20 @@ const GetDadosClientes = () => {
 
   return (
     <>
-    <Box margin="8">
-    <Flex justifyContent="space-between" margin="4" paddingBottom="6">
-    <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal" onClick={() => router.push('/')} >Voltar</Button>
-        <Text color="light" fontSize='3xl' fontFamily="Open Sans">Dados do cliente</Text>
-        <ColorModeSwitcher />
-    </Flex>
+    <Box margin="4">
+        <Flex margin="4" paddingBottom="6">
+                <Box>
+                <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal" onClick={() => router.push('/')} >Voltar</Button>
+                </Box>
+                <Spacer />
+                <Box>
+                <Text color="light" fontSize='3xl' fontFamily="Open Sans"  justifyContent="center" textAlign="center">Dados do cliente</Text>
+                </Box>
+                <Spacer />
+                <Box>
+                <ColorModeSwitcher />
+                </Box>
+            </Flex>
       <form onSubmit={handleSubmit(onSubmit)}>
         <HStack marginY="1rem">
             <Box>

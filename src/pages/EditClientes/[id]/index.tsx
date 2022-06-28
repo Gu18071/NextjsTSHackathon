@@ -1,21 +1,18 @@
-import type { NextPage } from 'next'
-import { Button, Heading, HStack } from '@chakra-ui/react'
+import { Button, HStack, Spacer } from '@chakra-ui/react'
 import {
     Text,
     Flex,
     Box,
-    Link,
     FormControl,
     FormLabel,
     Input,
     VStack,
 } from '@chakra-ui/react'
 import { ColorModeSwitcher } from '../../../Components/ColorModeSwitcher'
-import InputForm from '../../../Components/Input'
-import { useForm, SubmitHandler } from 'react-hook-form'
+import { useForm} from 'react-hook-form'
 import api from '../../../services/api'
 import { useRouter } from 'next/router'
-import { Component, useEffect } from 'react'
+import { useEffect } from 'react'
 import axios from 'axios'
 
 
@@ -40,11 +37,19 @@ const UpdateClientes = () => {
   return (
     <>
       <Box margin="4">
-    <Flex justifyContent="space-between" margin="4" paddingBottom="6">
-    <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal" onClick={() => router.push('/')} >Voltar</Button>
-        <Text color="light" fontSize='3xl' fontFamily="Open Sans">Editar os Clientes</Text>
-        <ColorModeSwitcher />
-    </Flex>
+      <Flex margin="4" paddingBottom="6">
+                <Box>
+                <Button fontSize="sm" alignSelf="flex-end" colorScheme="teal" onClick={() => router.push('/')} >Voltar</Button>
+                </Box>
+                <Spacer />
+                <Box>
+                <Text color="light" fontSize='3xl' fontFamily="Open Sans"  justifyContent="center" textAlign="center">Dados do cliente</Text>
+                </Box>
+                <Spacer />
+                <Box>
+                <ColorModeSwitcher />
+                </Box>
+            </Flex>
     <form onSubmit={handleSubmit(onSubmit)}>
         <HStack marginY="0.5rem">
             <FormControl margin="lrem">
